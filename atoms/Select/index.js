@@ -1,5 +1,7 @@
+import StyledSelect from "./styles";
+
 const Select = ({ options, fieldId, value, onChange }) => (
-  <select id={fieldId} value={value} onChange={onChange}>
+  <StyledSelect id={fieldId} value={value} onChange={onChange}>
     <option disabled value="">
       Select...
     </option>
@@ -8,7 +10,7 @@ const Select = ({ options, fieldId, value, onChange }) => (
         {option}
       </option>
     ))}
-  </select>
+  </StyledSelect>
 );
 
 export default Select;

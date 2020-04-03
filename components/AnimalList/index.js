@@ -1,14 +1,35 @@
+import { Wrapper, Card, Title, Action, ActionWrapper } from "./styles";
+
 const AnimalList = ({ animals, onDelete, onEdit, onShow }) => {
-  return animals.map(animal => {
-    const { id, name } = animal;
-    return (
-      <div key={id}>
-        <p onClick={() => onShow(animal)}>{name}</p>
-        <button onClick={() => onEdit(animal)}>Edit</button>
-        <button onClick={() => onDelete(id)}>Delete</button>
-      </div>
-    );
-  });
+  return (
+    <Wrapper>
+      {animals.map(animal => (
+        <Card key={animal.id} onClick={() => onShow(animal)}>
+          <Title>{animal.name}</Title>
+
+          <ActionWrapper>
+            <Action
+              isPrimary
+              onClick={e => {
+                e.stopPropagation();
+                onEdit(animal);
+              }}
+            >
+              Edit
+            </Action>
+            <Action
+              onClick={e => {
+                e.stopPropagation();
+                onDelete(animal.id);
+              }}
+            >
+              Delete
+            </Action>
+          </ActionWrapper>
+        </Card>
+      ))}
+    </Wrapper>
+  );
 };
 
 export default AnimalList;

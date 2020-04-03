@@ -5,6 +5,7 @@ import Label from "../../atoms/Label";
 import animalTypes from "../../constants/animalTypes";
 import animalDiets from "../../constants/animalDiets";
 import isValid from "../../utils/isFormValid";
+import { Form, SubmitButton } from "../../atoms/Form";
 
 const NewAnimal = ({ onSubmit }) => {
   const initialFormState = { name: "", type: "", diet: "", isExtinct: "" };
@@ -26,7 +27,7 @@ const NewAnimal = ({ onSubmit }) => {
   const { name, type, diet, isExtinct } = animal;
 
   return (
-    <form>
+    <Form>
       <Label htmlFor="name" text="Name:" />
       <TextInput fieldId="name" value={name} onChange={handleChange} />
 
@@ -53,10 +54,10 @@ const NewAnimal = ({ onSubmit }) => {
         value={isExtinct}
         onChange={handleChange}
       />
-      <button type="submit" onClick={handleSubmit}>
+      <SubmitButton type="submit" onClick={handleSubmit}>
         Add animal
-      </button>
-    </form>
+      </SubmitButton>
+    </Form>
   );
 };
 
