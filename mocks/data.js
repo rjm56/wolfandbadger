@@ -6,34 +6,34 @@ export default [
     name: "wolf",
     type: "mammal",
     diet: "carnivore",
-    isExtinct: false
+    isExtinct: "not extinct"
   },
   {
     id: uuidv4(),
     name: "badger",
     type: "mammal",
     diet: "herbivore",
-    isExtinct: false
+    isExtinct: "not extinct"
   },
   {
     id: uuidv4(),
     name: "cat",
     type: "mammal",
     diet: "carnivore",
-    isExtinct: false
+    isExtinct: "not extinct"
   },
   {
     id: uuidv4(),
     name: "frog",
     type: "amphibious",
     diet: "herbivore",
-    isExtinct: false
+    isExtinct: "not extinct"
   },
   {
     id: uuidv4(),
     name: "clown fish",
     type: "fish",
     diet: "herbivore",
-    isExtinct: false
+    isExtinct: "not extinct"
   }
 ];

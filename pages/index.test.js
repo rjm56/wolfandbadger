@@ -138,7 +138,7 @@ describe("Animal top trumps", () => {
     const events = [
       { target: { id: "type", value: "mammal" } },
       { target: { id: "diet", value: "herbivore" } },
-      { target: { id: "isExtinct", value: "false" } }
+      { target: { id: "isExtinct", value: "not extinct" } }
     ];
 
     let newAnimalForm;

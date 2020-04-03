@@ -12,8 +12,8 @@ const AnimalDetail = ({ name, type, diet, isExtinct }) => (
       <Text>{diet}</Text>
     </Row>
     <Row>
-      <Label>Is extinct: </Label>
-      <Text>{isExtinct ? "yes" : "no"}</Text>
+      <Label>Extinct: </Label>
+      <Text>{isExtinct}</Text>
     </Row>
   </Wrapper>
 );

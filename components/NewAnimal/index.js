@@ -4,6 +4,7 @@ import TextInput from "../../atoms/TextInput";
 import Label from "../../atoms/Label";
 import animalTypes from "../../constants/animalTypes";
 import animalDiets from "../../constants/animalDiets";
+import animalExtinct from "../../constants/animalExtinct";
 import isValid from "../../utils/isFormValid";
 import { Form, SubmitButton } from "../../atoms/Form";
 
@@ -47,9 +48,9 @@ const NewAnimal = ({ onSubmit }) => {
         onChange={handleChange}
       />
 
-      <Label htmlFor="isExtinct" text="Is extinct:" />
+      <Label htmlFor="isExtinct" text="Extinct:" />
       <Select
-        options={["true", "false"]}
+        options={animalExtinct}
         fieldId="isExtinct"
         value={isExtinct}
         onChange={handleChange}
