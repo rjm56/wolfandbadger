@@ -2,7 +2,19 @@
 
 ## Getting Started
 
-First, run the development server:
+Clone the project:
+
+```bash
+git clone
+```
+
+Install dependencies:
+
+```bash
+npm i
+```
+
+Run the development server:
 
 ```bash
 npm run dev
