@@ -1,52 +1,91 @@
 import Head from "next/head";
+import { useState, useEffect } from "react";
+import AnimalList from "../components/AnimalList";
+import NewAnimal from "../components/NewAnimal";
+import { v4 as uuidv4 } from "uuid";
+import initialState from "../mocks/data";
+import EditAnimal from "../components/EditAnimal";
+import Modal from "../components/Modal";
+import AnimalDetail from "../components/AnimalDetail";
 
-const Home = () => (
-  <div className="container">
-    <Head>
-      <title>Animal Top Trumps</title>
-      <link rel="icon" href="/favicon.ico" />
-    </Head>
+const Home = () => {
+  const [animals, updateAnimals] = useState(initialState);
+  const [currentAnimal, setCurrentAnimal] = useState();
+  const [showModal, setShowModal] = useState(false);
+  const [modalId, setModalId] = useState();
 
-    <main>
-      <h1 className="title">
-        Welcome to <a href="https://nextjs.org">Next.js!</a>
-      </h1>
+  const closeModal = () => {
+    setShowModal(false);
+    setModalId("");
+  };
 
-      <p className="description">
-        Get started by editing <code>pages/index.js</code>
-      </p>
+  const handleAddButtonClick = () => {
+    setShowModal(true);
+    setModalId("add");
+  };
 
-      <div className="grid">
-        <a href="https://nextjs.org/docs" className="card">
-          <h3>Documentation &rarr;</h3>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
+  const handleEditButtonClick = animal => {
+    setCurrentAnimal(animal);
+    setShowModal(true);
+    setModalId("edit");
+  };
 
-        <a href="https://nextjs.org/learn" className="card">
-          <h3>Learn &rarr;</h3>
-          <p>Learn about Next.js in an interactive course with quizzes!</p>
-        </a>
+  const handleShowClick = animal => {
+    setCurrentAnimal(animal);
+    setShowModal(true);
+    setModalId("show");
+  };
 
-        <a
-          href="https://github.com/zeit/next.js/tree/master/examples"
-          className="card"
-        >
-          <h3>Examples &rarr;</h3>
-          <p>Discover and deploy boilerplate example Next.js projects.</p>
-        </a>
+  const handleAdd = newAnimal => {
+    updateAnimals([...animals, { id: uuidv4(), ...newAnimal }]);
+    closeModal();
+  };
 
-        <a
-          href="https://zeit.co/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          className="card"
-        >
-          <h3>Deploy &rarr;</h3>
-          <p>
-            Instantly deploy your Next.js site to a public URL with ZEIT Now.
-          </p>
-        </a>
-      </div>
-    </main>
-  </div>
-);
+  const handleEdit = editedAnimal => {
+    const updatedAnimals = animals.map(animal =>
+      animal.id === editedAnimal.id ? editedAnimal : animal
+    );
+    updateAnimals(updatedAnimals);
+    closeModal();
+  };
+
+  const handleDelete = animalId => {
+    const updatedAnimals = animals.filter(animal => animal.id !== animalId);
+    updateAnimals(updatedAnimals);
+  };
+
+  const modalContent = {
+    show: <AnimalDetail currentAnimal={currentAnimal} />,
+    edit: <EditAnimal currentAnimal={currentAnimal} onSubmit={handleEdit} />,
+    add: <NewAnimal onSubmit={handleAdd} />
+  };
+
+  const renderModalContent = () => modalContent[modalId];
+
+  return (
+    <div>
+      <Head>
+        <title>Animal Top Trumps</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      <main>
+        <h1>Animal Top Trumps</h1>
+        <AnimalList
+          animals={animals}
+          onDelete={handleDelete}
+          onEdit={handleEditButtonClick}
+          onShow={handleShowClick}
+        />
+        <button onClick={handleAddButtonClick}>Add New</button>
+        {showModal && (
+          <Modal onClose={() => setShowModal(false)}>
+            {renderModalContent()}
+          </Modal>
+        )}
+      </main>
+    </div>
+  );
+};
 
 export default Home;
